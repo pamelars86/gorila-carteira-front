@@ -17,7 +17,7 @@ class InvestmentCreateForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  createStudent = e => {
+  createInvestment = e => {
     e.preventDefault();
     console.log("datos...");
     console.log(this.state);
@@ -36,7 +36,7 @@ class InvestmentCreateForm extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.createStudent}>
+      <Form onSubmit={this.createInvestment}>
         <Row>
             <Col sm="2">Tipo de Renda</Col>
             <Col sm="4">Valor do Investimento</Col>

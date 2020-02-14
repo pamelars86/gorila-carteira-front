@@ -2,18 +2,9 @@ import React, { Component } from "react";
 import { Table, Row, Col, Button } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import axios from "axios";
-
-import { API_URL } from "../constants";
-
-
 const InvestmentByType = (props) => {
   
-  const {investments} = props;
-  const deleteInvestment = id => {
-    axios.delete(`${API_URL}${id}/`);;
-  };
-
+  const { deleteInvestment, investments } = props;
   return(
 
   <Table>
@@ -53,21 +44,21 @@ const InvestmentByType = (props) => {
 
 
 class InvestmentList extends Component {
-
   render() {
-    const investments = this.props.investments;
-    const fixedInv = investments.filter( inv => inv.type_investment === 'Fixo');
-    const fixedVar= investments.filter( inv => inv.type_investment === 'Variável');
+    const { deleteInvestment, investments } = this.props
+
+    const fixedInv = investments && investments.filter( inv => inv.type_investment === 'Fixo');
+    const fixedVar= investments && investments.filter( inv => inv.type_investment === 'Variável');
     return (
       <Row>
         <Col sm="6">
           <h3 className="investment__title-type">Renda Fixa</h3>
-          <InvestmentByType investments={fixedInv} />
+          <InvestmentByType investments={fixedInv} deleteInvestment={deleteInvestment }/>
         </Col>
 
         <Col sm="6">
         <h3 className="investment__title-type">Renda Variável</h3>
-          <InvestmentByType investments={fixedVar} />
+          <InvestmentByType investments={fixedVar} deleteInvestment={deleteInvestment }/>
         </Col>
       </Row>
     );

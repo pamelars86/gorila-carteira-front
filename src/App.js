@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 import Header from "./components/Header";
-import Home from "./components/Home";
+import HomeContainer from "./containers/HomeContainer";
 import { ToastContainer } from 'react-toastify';
 
 import {
@@ -28,7 +28,7 @@ class App extends Component {
     return (
       <>
         <Header />
-        <Home />
+        <HomeContainer />
         <ToastContainer hideProgressBar position="bottom-right" />
       </>
     );
