@@ -73,16 +73,19 @@ import {
           myInvestments: action.myInvestments,
           isFetchingMyInvestments: true,
           error: null,
+          isCreated: false,
         });
       case LIST_MY_INVESTMENTS_SUCCESS:
         return Object.assign({}, state, {
           myInvestments: action.myInvestments,
           isFetchingMyInvestments: false,
+          isCreated: false,
         });
       case LIST_MY_INVESTMENTS_FAILURE:
         return Object.assign({}, state, {
           isFetchingMyInvestments: false,
           error: action.error,
+          isCreated: false,
         });
       default:
         return state;

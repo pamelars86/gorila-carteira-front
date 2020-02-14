@@ -27,3 +27,32 @@ h1, h2, h3, h4{
   font-weight: bold;
   color: #2b9791;
 }
+.error-message-text{
+  color: #dc3545;
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+
+/*css for toast*/
+.Toastify__toast--success {
+  font-family: 'Lato' !important;
+  letter-spacing: 0.3px;
+  color:#155724;
+  background-color: #d4edda !important;
+  border-color: #c3e6cb;  
+  border: 1px solid  #c3e6cb;
+  border-radius: 0.25rem !important;
+  box-shadow: none;
+}
+
+  .Toastify__toast--error{
+    font-family: 'Lato' !important;
+      letter-spacing: 0.3px;
+      color: #721c24;
+      background-color: #f8d7da !important;
+      border-color: #f5c6cb;
+      border: 1px solid  #f5c6cb;
+      border-radius: 0.25rem !important;
+      box-shadow: none;
+  }

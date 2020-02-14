@@ -1,6 +1,8 @@
 import {
     investmentService,
   } from '../services';
+  import {reset} from 'redux-form';
+
   
   export const LIST_MY_INVESTMENTS = 'LIST_MY_INVESTMENTS';
   export const LIST_MY_INVESTMENTS_SUCCESS = 'LIST_MY_INVESTMENTS_SUCCESS';
@@ -75,6 +77,7 @@ import {
       return investmentService.createMyInvestment(props).then(
         (newInvestment) => {
           dispatch(createInvestmentSuccess(newInvestment));
+          dispatch(reset('create_investment'));
         },
         (error) => {
           dispatch(createInvestmentFailure(error));

@@ -1,36 +1,26 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "reactstrap";
 import InvestmentList from "./InvestmentList";
-
-import axios from "axios";
-
-import { API_URL } from "../constants";
-import InvestmentCreateFormR from "./InvestmentCreateFormR";
+import InvestmentResume from "./InvestmentResume"
+import InvestmentCreateForm from "./InvestmentCreateForm";
 
 class Home extends Component {
- /* state = {
-    investments: []
-  };*/
 
   componentDidMount() {
     const { listMyInvestments } = this.props;
     listMyInvestments();
   }
 
-  /*getInvestments = () => {
-    axios.get(API_URL).then(res => this.setState({ investments: res.data }));
-  };
-
-  resetState = () => {
-    this.getInvestments();
-  };*/
-
   render() {
-    const { createMyInvestment, deleteInvestment, myInvestments} = this.props;
+    const { createMyInvestment, deleteInvestment, myInvestments, isCreated, listMyInvestments} = this.props;
+
+    if (isCreated) {
+      listMyInvestments();
+    }
 
     return (
       <Container style={{ marginTop: "20px" }}>
-        <InvestmentCreateFormR />
+        <InvestmentCreateForm onSubmit={createMyInvestment} />
         <Row>
           <Col>
             <InvestmentList
@@ -39,6 +29,7 @@ class Home extends Component {
             />
           </Col>
         </Row>
+        <InvestmentResume />
       </Container>
     );
   }

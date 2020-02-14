@@ -10,7 +10,7 @@ function listMyInvestments() {
 
 /* Create a new investment */
 function createMyInvestment(newInvestmentData) {
-  return axios.post(`${apiUrl}/investments/`, newInvestmentData)
+  return axios.post(`${apiUrl}/`, newInvestmentData)
     .then(response => response.data).then(newInvestment => newInvestment);
 }
 

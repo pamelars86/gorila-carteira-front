@@ -2,41 +2,70 @@ import React from "react";
 import { Input, Button, Col, Row, Form } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import axios from "axios";
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { requiredValidator } from '../helpers/validators';
 
-import { API_URL } from "../constants";
 
-class InvestmentCreateForm extends React.Component {
-  state = {
-    type_investment: "",
-    purchase_date: "",
-    amount: 0
-  };
+const renderField = ({
+    input,
+    label,
+    type,
+    meta: { touched, error, warning },
+  }) => (
+    <div>
+      <Input
+        {...input}
+        placeholder={label}
+        type={type}
+        autoFocus
+      />
+      { touched
+        && ((error && (
+        <span className="error-message-text">
+          {error}
+        </span>
+        ))
+        || (warning && (
+        <span>
+          {' '}
+          {warning}
+          {' '}
+        </span>
+        )))
+      }
+    </div>
+  );
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  const renderSelectField = ({
+    input, label, meta: { touched, error }, children, optionDefault,
+  }) => (
+    <div>
+      <div>
+        <select {...input} className="form-control">
+          <option value={optionDefault}>
+            {label}
+          </option>
+          {children}
+        </select>
+        {touched && error && (
+          <span className="error-message-text">
+            {error}
+          </span>
+        )}
+      </div>
+    </div>
+  );
 
-  createInvestment = e => {
-    e.preventDefault();
-    console.log("datos...");
-    console.log(this.state);
-    axios.post(API_URL, this.state).then(() => {
-      this.setState({
-        type_investment: "",
-        purchase_date: "",
-        amount: 0
-      });
-    });
-  };
-
-  defaultIfEmpty = value => {
-    return value === "" ? "" : value;
-  };
+class InvestmentCreateFormR extends React.Component {
 
   render() {
+    const {
+        handleSubmit
+      } = this.props;
+
     return (
-      <Form onSubmit={this.createInvestment}>
+      <Form onSubmit={handleSubmit}>
         <Row>
             <Col sm="2">Tipo de Renda</Col>
             <Col sm="4">Valor do Investimento</Col>
@@ -44,35 +73,37 @@ class InvestmentCreateForm extends React.Component {
         </Row>
         <Row className="mb-5">
             <Col sm="2">
-                <Input 
+                <Field 
                     type="select" 
                     name="type_investment"
                     id="type_investment" 
-                    onChange={this.onChange}
-                    value={this.defaultIfEmpty(this.state.type_investment)}
+                    component={renderSelectField}
+                    label="Selecione um tipo"
+                    validate={requiredValidator}
                 >
-                <option value="Fixo">Fixa</option>
-                <option value="Variável">Variável</option>
-                </Input>
+                    <option value="Fixo">Fixa</option>
+                    <option value="Variável">Variável</option>
+                </Field>
 
             </Col>
             <Col sm="4">
-                <Input
-                type="number"
-                name="amount"
-                id="amount"
-                placeholder="Insira um valor de renda"
-                onChange={this.onChange}
-                value={this.defaultIfEmpty(this.state.amount)}
+                <Field
+                  type="number"
+                  name="amount"
+                  id="amount"
+                  placeholder="Insira um valor de renda"
+                  component={renderField}
+                  validate={requiredValidator}
                 />
             </Col>
             <Col sm="4">
-                <Input
-                type="date"
-                name="purchase_date"
-                id="purchase_date"
-                onChange={this.onChange}
-                value={this.defaultIfEmpty(this.state.purchase_date)}
+                <Field
+                    name="purchase_date"
+                    id="purchase_date"
+                    type="date"
+                    showTime={false}
+                    component={renderField}
+                    validate={requiredValidator}
                 />
             </Col>
             <Col sm="2" className="text-center">
@@ -84,4 +115,19 @@ class InvestmentCreateForm extends React.Component {
   }
 }
 
-export default InvestmentCreateForm;
+
+const mapStateToProps = () => {
+    return ({
+      initialValues:  {
+        type_investment: "",
+        purchase_date: "",
+        amount: 0
+      },
+    });
+  };
+  
+export default connect(
+    mapStateToProps,
+  )(reduxForm({
+    form: 'create_investment',
+  })(InvestmentCreateFormR));

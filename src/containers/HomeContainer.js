@@ -11,6 +11,7 @@ const mapStateToProps = state => ({
   myInvestments: state.investment.myInvestments,
   error: state.investment.error,
   isDeleted: state.investment.isDeleted,
+  isCreated: state.investment.isCreated,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -18,7 +19,6 @@ const mapDispatchToProps = (dispatch) => {
     listMyInvestments: () => dispatch(listMyInvestments()),
     createMyInvestment: (values) => dispatch(createMyInvestment(values)),
     deleteInvestment: (idInvestment) => dispatch(deleteInvestment(idInvestment))
- 
 } )
 };
 
