@@ -1,38 +1,29 @@
-.App {
+@import url(https://fonts.googleapis.com/css?family=Lato&display=swap);
+
+/*utilitarios*/
+body{
+  font-family: 'Lato' !important;
+  font-size: 14px;
+}
+
+h1, h2, h3, h4{
+  font-family: 'Lato';
+}
+
+.investment__title-type{
   text-align: center;
+  font-size: 16px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* reactstrap - update*/
+.btn {
+  font-size: 14px;
+  padding: 5px 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+/*new classes for Gorila*/
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.investment__title-type{
+  font-weight: bold;
+  color: #2b9791;
 }

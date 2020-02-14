@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+import Header from "./components/Header";
+import Home from "./components/Home";
+import { ToastContainer } from 'react-toastify';
+
+import {
+  faEnvelope, faKey, faFileWord, faThumbtack,
+  faFile, faPencilAlt, faSyncAlt, faSave, faTrashAlt,
+  faBars,
+  faPlus, faMinus,
+  faUser, faHome, faSignOutAlt, faUserCircle,
+  faSearch, faFolder, faFileAlt, faFilter,
+} from '@fortawesome/free-solid-svg-icons';
+
+library.add(faEnvelope, faKey, faFileWord, faThumbtack, faPlus, faMinus, faFile, faPencilAlt, faSyncAlt, faBars,
+  faUser, faHome, faSignOutAlt, faUserCircle, faSearch, faFolder, faFileAlt, faFilter, faTrashAlt);
+
+
+class App extends Component {
+  render() {
+    return (
+      <>
+        <Header />
+        <Home />
+        <ToastContainer hideProgressBar position="bottom-right" />
+      </>
+    );
+  }
 }
 
 export default App;
