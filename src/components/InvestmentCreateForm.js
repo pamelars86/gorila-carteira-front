@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { requiredValidator } from '../helpers/validators';
 
 
 const renderField = ({
@@ -13,7 +12,7 @@ const renderField = ({
     type,
     meta: { touched, error, warning },
   }) => (
-    <div>
+    <div className="mb-1">
       <Input
         {...input}
         placeholder={label}
@@ -40,24 +39,22 @@ const renderField = ({
   const renderSelectField = ({
     input, label, meta: { touched, error }, children, optionDefault,
   }) => (
-    <div>
-      <div>
-        <select {...input} className="form-control">
-          <option value={optionDefault}>
-            {label}
-          </option>
-          {children}
-        </select>
-        {touched && error && (
-          <span className="error-message-text">
-            {error}
-          </span>
-        )}
-      </div>
+    <div className="mb-1">
+      <select {...input} className="form-control">
+        <option value={optionDefault}>
+          {label}
+        </option>
+        {children}
+      </select>
+      {touched && error && (
+        <span className="error-message-text">
+          {error}
+        </span>
+      )}
     </div>
   );
 
-class InvestmentCreateFormR extends React.Component {
+class InvestmentCreateForm extends React.Component {
 
   render() {
     const {
@@ -73,28 +70,26 @@ class InvestmentCreateFormR extends React.Component {
         </Row>
         <Row className="mb-5">
             <Col sm="2">
-                <Field 
-                    type="select" 
-                    name="type_investment"
-                    id="type_investment" 
-                    component={renderSelectField}
-                    label="Selecione um tipo"
-                    validate={requiredValidator}
-                >
-                    <option value="Fixo">Fixa</option>
-                    <option value="Variável">Variável</option>
-                </Field>
-
+              <Field 
+                type="select" 
+                name="type_investment"
+                id="type_investment" 
+                component={renderSelectField}
+                label="Selecione um tipo"
+                optionDefault="NaN"
+              >
+                <option value="Fixo">Fixa</option>
+                <option value="Variável">Variável</option>
+              </Field>
             </Col>
             <Col sm="4">
-                <Field
-                  type="number"
-                  name="amount"
-                  id="amount"
-                  placeholder="Insira um valor de renda"
-                  component={renderField}
-                  validate={requiredValidator}
-                />
+              <Field
+                type="number"
+                name="amount"
+                id="amount"
+                placeholder="Insira um valor de renda"
+                component={renderField}
+              />
             </Col>
             <Col sm="4">
                 <Field
@@ -103,7 +98,7 @@ class InvestmentCreateFormR extends React.Component {
                     type="date"
                     showTime={false}
                     component={renderField}
-                    validate={requiredValidator}
+                    min="2000-01-02"
                 />
             </Col>
             <Col sm="2" className="text-center">
@@ -114,7 +109,6 @@ class InvestmentCreateFormR extends React.Component {
     );
   }
 }
-
 
 const mapStateToProps = () => {
     return ({
@@ -130,4 +124,4 @@ export default connect(
     mapStateToProps,
   )(reduxForm({
     form: 'create_investment',
-  })(InvestmentCreateFormR));
+  })(InvestmentCreateForm));

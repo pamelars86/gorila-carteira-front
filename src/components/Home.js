@@ -12,14 +12,14 @@ class Home extends Component {
   }
 
   render() {
-    const { createMyInvestment, deleteInvestment, myInvestments, isCreated, listMyInvestments} = this.props;
+    const { createMyInvestment, deleteInvestment, myInvestments, isCreated, listMyInvestments, isDeleted} = this.props;
 
-    if (isCreated) {
+    if (isCreated || isDeleted) {
       listMyInvestments();
     }
 
     return (
-      <Container style={{ marginTop: "20px" }}>
+      <Container style={{ marginTop: "20px" }} className="c-gorila-home">
         <InvestmentCreateForm onSubmit={createMyInvestment} />
         <Row>
           <Col>
@@ -29,7 +29,9 @@ class Home extends Component {
             />
           </Col>
         </Row>
-        <InvestmentResume />
+        <InvestmentResume 
+          investments={myInvestments}
+        />
       </Container>
     );
   }

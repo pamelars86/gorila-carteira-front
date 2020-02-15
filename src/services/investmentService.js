@@ -16,7 +16,7 @@ function createMyInvestment(newInvestmentData) {
 
 // Delete an investment given its ID
 function deleteMyInvestment(idInvestment) {
-  return axios.delete(`${apiUrl}/investments/${idInvestment}/`)
+  return axios.delete(`${apiUrl}/${idInvestment}/`)
     .then(response => response.data).then(() => idInvestment);
 }
 
