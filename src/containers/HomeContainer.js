@@ -21,6 +21,11 @@ const mapDispatchToProps = (dispatch) => {
 
     createMyInvestment: (values) => {
       const errors = [];
+      const newInvestment = {
+        type_investment: values.type_investment,
+        amount : parseFloat(values.amount).toFixed(2),
+        purchase_date: values.purchase_date,
+      }
       if (!values.amount) {
         errors.amount = 'Campo obrigatório';
       }
@@ -32,7 +37,7 @@ const mapDispatchToProps = (dispatch) => {
         errors.type_investment = 'Selecione um tipo';
       }
       if (Object.keys(errors).length !== 0) throw new SubmissionError(errors);
-      dispatch(createMyInvestment(values))
+      dispatch(createMyInvestment(newInvestment))
     },
     deleteInvestment: (idInvestment) => dispatch(deleteInvestment(idInvestment)),
 } )

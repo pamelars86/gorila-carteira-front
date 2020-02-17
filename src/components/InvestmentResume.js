@@ -34,10 +34,6 @@ class InvestmentResume extends React.Component {
   render() {
     const { investments } = this.props
     const dataPie = generateDataPie(investments);
-    console.log("Datapie!! PAMELA");
-    console.log(dataPie);
-    
-
     return (
       <div className="mb-5">
         <Row>
